@@ -148,3 +148,28 @@ main > section {
 .socials a:hover {
     color: var(--accent)
 }
+
+/* Website Under Construction Section */
+
+.construction_progress_container {
+    width: 100%;
+    background-color: green;
+    border-radius: 8px;
+    height: 20px;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+.progress_bar {
+    height: 100%;
+    width: 0%;
+    background-color: black;
+    border-radius: 8px;
+    transition: width 0.4s ease;
+}
+
+.checklist_item {
+    display: flexbox;
+    margin: 8px 0;
+    font-family: var(--primary-text);
+}
