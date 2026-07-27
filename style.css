@@ -83,6 +83,16 @@ main > section {
     }
 }
 
+.avatar {
+    width: 150px;
+    height: 150px;
+    background-color: var(--accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+/* About Section */
+
 .about {
     display: flex;
     align-items: center;
@@ -94,12 +104,8 @@ main > section {
     flex: 1;
 }
 
-.avatar {
-    width: 150px;
-    height: 150px;
-    background-color: var(--accent);
-    border-radius: 50%;
-    flex-shrink: 0;
+.about-text {
+    padding-top: 10px;
 }
 
 /* Socials Section */
