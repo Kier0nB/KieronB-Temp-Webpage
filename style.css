@@ -180,6 +180,15 @@ main > section {
 
 /* Website Under Construction Section */
 
+.webpage_under_construction p {
+    margin-bottom: 20px;
+}
+
+.construction_header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
 .construction_progress_container {
     width: 100%;
     background-color: var(--bento-accent);
@@ -187,6 +196,7 @@ main > section {
     height: 20px;
     overflow: hidden;
     margin: 20px 0;
+    text-align: center;
 }
 
 .progress_bar {
