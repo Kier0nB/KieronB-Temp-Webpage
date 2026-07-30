@@ -196,8 +196,16 @@ main > section {
     transition: width 0.4s ease;
 }
 
+.construction_checkbox {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 80px;
+    width: fit-content;
+    margin: 0 auto;
+}
+
 .checklist_item {
-    display: flexbox;
-    margin: 8px 0;
-    font-family: var(--primary-text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
