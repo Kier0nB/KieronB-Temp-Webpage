@@ -6,6 +6,7 @@
     --accent: #587965;
     --primary-text: #1a1a1a;
     --secondary-text: #6e6e6e;
+    --bento-accent: #eceef0;
     /*Spacing (Maybe)*/
     /*Transitions (Maybe)*/
     /*Fonts*/
@@ -181,7 +182,7 @@ main > section {
 
 .construction_progress_container {
     width: 100%;
-    background-color: green;
+    background-color: var(--bento-accent);
     border-radius: 8px;
     height: 20px;
     overflow: hidden;
@@ -191,7 +192,7 @@ main > section {
 .progress_bar {
     height: 100%;
     width: 0%;
-    background-color: black;
+    background-color: var(--accent);
     border-radius: 8px;
     transition: width 0.4s ease;
 }
