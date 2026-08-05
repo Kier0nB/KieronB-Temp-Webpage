@@ -66,21 +66,15 @@ main > section {
     min-height: 300px;
 }
 
-@media (max-width: 850px) {
+@media (max-height: 850px) and (orientation: landscape) {
     .bento-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-        padding: 20px
+        gap: 25px;
+        padding: 40px;
     }
 
     main > section {
+        min-height: 200px;
         border-radius: 20px;
-        min-height: auto;
-    }
-
-    .about {
-        flex-direction: column;
-        align-items: center;
     }
 }
 
@@ -144,6 +138,12 @@ main > section {
 }
 
 /* Socials Section */
+.socials {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
 
 .socials ul {
     list-style-type: none;
