@@ -21,7 +21,7 @@
     --bento-fill: #2d2d2d;
     --accent: #587965;
     --primary-text: #eaeaea;
-    --secondary-text: 	#b0b0b0;
+    --secondary-text: #b0b0b0;
     /*Spacing (Maybe)*/
     /*Transitions (Maybe)*/
 }
@@ -117,6 +117,10 @@ body.darkmode .toggle-circle {
 
 body.darkmode .theme-toggle {
     background-color: black;
+}
+
+body.darkmode .social-icons {
+    filter: invert(1);
 }
 
 /* About Section */
