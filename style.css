@@ -78,6 +78,47 @@ main > section {
     }
 }
 
+/* Theme-Toggle */
+
+.toggle_container {
+    position: relative;
+    width: 100%;
+}
+
+.theme-toggle {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    width: 50px;
+    height: 24px;
+    border-radius: 12px;
+    background-color: var(--bento-fill);
+    cursor: pointer;
+    border: none;
+    transition: var(--bento-accent) 0.3s ease;
+    pointer-events: auto;
+}
+
+.toggle-circle {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: var(--bento-accent);
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    transition: left 0.3s ease;
+}
+
+body.darkmode .toggle-circle {
+    left: 29px;
+}
+
+body.darkmode .theme-toggle {
+    background-color: black;
+}
+
 /* About Section */
 
 .about {
@@ -246,4 +287,31 @@ main > section {
 .task:checked {
     background-color: var(--accent);
     border-color: var(--accent);
+}
+
+/* Mobile First / Portrait View */
+@media (max-width: 768px) {
+    .bento-grid {
+        grid-template-columns: 1fr; /* Forces 1 column */
+        padding: 40px 20px;         /* Reduces side padding for small screens */
+        gap: 30px;                  /* Adjusts gap if needed */
+    }
+
+    /* Optional: Adjust section padding for mobile */
+    main > section {
+        padding: 30px;
+        border-radius: 30px;
+    }
+
+    /* Ensure avatar doesn't overflow on small screens */
+    .about {
+        flex-direction: column-reverse; /* Puts text below image, or remove to keep image on top */
+        text-align: center;
+    }
+    
+    .avatar {
+        width: 120px;
+        height: 120px;
+        margin-bottom: 20px;
+    }
 }
