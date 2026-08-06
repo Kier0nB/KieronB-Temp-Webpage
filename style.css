@@ -9,8 +9,6 @@
     --bento-accent: #eceef0;
     --toggle-background: #ffffff;
     --toggle-circle: #141414;
-    /*Spacing (Maybe)*/
-    /*Transitions (Maybe)*/
     /*Fonts*/
     --font-heading: 'Fraunces', 'Times New Roman', Georgia, serif;
     --font-body: 'Source Serif 4', 'Georgia', 'Cambria', serif;
@@ -26,8 +24,6 @@
     --secondary-text: #b0b0b0;
     --toggle-background: #2d2d2d;
     --toggle-circle: #eceef0;
-    /*Spacing (Maybe)*/
-    /*Transitions (Maybe)*/
 }
 
 * {
@@ -47,46 +43,22 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    color: var(--primary-text)
+    color: var(--primary-text);
 }
 
 h1, h2 {
     font-family: var(--font-heading);
 }
 
-.bento-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 50px;
-    padding: 100px;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-main > section {
-    background-color: var(--bento-fill);
-    border-radius: 50px;
-    padding: 40px;
-    min-height: 300px;
-}
-
-@media (max-height: 850px) and (orientation: landscape) {
-    .bento-grid {
-        gap: 25px;
-        padding: 40px;
-    }
-
-    main > section {
-        min-height: 200px;
-        border-radius: 20px;
-    }
-}
-
-/* Theme-Toggle */
-
+/* ========================================
+   THEME TOGGLE STYLES
+   ======================================== */
 .toggle_container {
-    position: relative;
+    position: fixed;
+    top: 0;
     width: 100%;
+    padding-top: 20px;
+    z-index: 100;
 }
 
 .theme-toggle {
@@ -99,10 +71,9 @@ main > section {
     border-radius: 18px;
     background-color: var(--toggle-background);
     cursor: pointer;
-    border: none;
-    transition: var(--toggle-circle) 0.3s ease;
+    border: 5px solid var(--accent);
+    transition: background-color 0.3s ease;
     pointer-events: auto;
-    border: 5px solid var(--accent)
 }
 
 .toggle-circle {
@@ -120,16 +91,123 @@ body.darkmode .toggle-circle {
     left: 40px;
 }
 
-body.darkmode .theme-toggle {
-    background-color: var(--toggle-background);
-}
-
 body.darkmode .social-icons {
     filter: invert(1);
 }
 
-/* About Section */
+/* ========================================
+   BENTO GRID LAYOUT
+   ======================================== */
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px;
+    padding: 100px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
 
+main > section {
+    background-color: var(--bento-fill);
+    border-radius: 50px;
+    padding: 40px;
+    min-height: 300px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    cursor: pointer;
+    position: relative;
+}
+
+/* HOVER EFFECT - GREEN BORDER */
+main > section:hover {
+    border: 3px solid var(--accent);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(30, 107, 79, 0.3);
+}
+
+body.darkmode main > section:hover {
+    box-shadow: 0 10px 25px rgba(30, 107, 79, 0.5);
+}
+
+/* ========================================
+   EXPANDED STATE (2/3 SCREEN, GREEN BORDER)
+   ======================================== */
+main > section.expanded {
+    position: fixed;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) scale(1) !important;
+    z-index: 1000;
+    
+    width: calc(66vw - 40px);
+    max-width: 900px;
+    min-height: 50vh;
+    
+    background-color: var(--bento-fill);
+    border-radius: 50px;
+    padding: 60px;
+    margin: 0 !important;
+    
+    /* Green border + constant shadow */
+    border: 4px solid var(--accent);
+    box-shadow: 0 30px 60px -12px rgba(30, 107, 79, 0.5);
+    
+    /* Smooth scale/fade transitions */
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.4s ease;
+    opacity: 1;
+}
+
+/* Disable hover effects when expanded */
+main > section.expanded:hover {
+    transform: translate(-50%, -50%) scale(1) !important;
+    box-shadow: 0 30px 60px -12px rgba(30, 107, 79, 0.5);
+}
+
+/* Disable hover effects when expanded */
+main > section.expanded:hover {
+    transform: translate(-50%, -50%) scale(1) !important;
+    box-shadow: 0 30px 60px -12px rgba(30, 107, 79, 0.5);
+}
+
+/* ========================================
+   BACKDROP OVERLAY
+   ======================================== */
+.overlay-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.overlay-backdrop.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ========================================
+   PLACEHOLDER FOR GRID STABILITY
+   ======================================== */
+.section-placeholder {
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* Block interaction with other boxes when one is expanded */
+.bento-grid.blocked > section:not(.expanded) {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+/* ========================================
+   ABOUT SECTION
+   ======================================== */
 .about {
     display: flex;
     align-items: center;
@@ -153,14 +231,14 @@ body.darkmode .social-icons {
     object-fit: cover;
     object-position: center;
     border: 5px solid var(--accent);
-
     margin: 0;
     padding: 0;
     display: block;
 }
 
-/* Email Contact Section */
-
+/* ========================================
+   CONTACT SECTION
+   ======================================== */
 .contact_header {
     text-align: center;
     margin-bottom: 20px;
@@ -189,11 +267,9 @@ body.darkmode .social-icons {
     padding: 4px 0;
 }
 
-.socials a:hover:visited {
-    color: var(--accent);
-}
-
-/* Socials Section */
+/* ========================================
+   SOCIALS SECTION
+   ======================================== */
 .socials {
     align-items: center;
     justify-content: center;
@@ -236,8 +312,9 @@ body.darkmode .social-icons {
     color: var(--accent);
 }
 
-/* Website Under Construction Section */
-
+/* ========================================
+   CONSTRUCTION SECTION
+   ======================================== */
 .webpage_under_construction p {
     margin-bottom: 20px;
 }
@@ -266,7 +343,7 @@ body.darkmode .social-icons {
 }
 
 .construction_checkbox {
-    display:grid;
+    display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 8px 80px;
     width: fit-content;
@@ -290,7 +367,6 @@ body.darkmode .social-icons {
     background-color: transparent;
     cursor: default;
     vertical-align: middle;
-
 }
 
 .task:checked {
@@ -298,23 +374,23 @@ body.darkmode .social-icons {
     border-color: var(--accent);
 }
 
-/* Mobile First / Portrait View */
+/* ========================================
+   MOBILE RESPONSIVE
+   ======================================== */
 @media (max-width: 768px) {
     .bento-grid {
-        grid-template-columns: 1fr; /* Forces 1 column */
-        padding: 40px 20px;         /* Reduces side padding for small screens */
-        gap: 30px;                  /* Adjusts gap if needed */
+        grid-template-columns: 1fr;
+        padding: 40px 20px;
+        gap: 30px;
     }
 
-    /* Optional: Adjust section padding for mobile */
     main > section {
         padding: 30px;
         border-radius: 30px;
     }
 
-    /* Ensure avatar doesn't overflow on small screens */
     .about {
-        flex-direction: column-reverse; /* Puts text below image, or remove to keep image on top */
+        flex-direction: column-reverse;
         text-align: center;
     }
     
@@ -322,5 +398,24 @@ body.darkmode .social-icons {
         width: 120px;
         height: 120px;
         margin-bottom: 20px;
+    }
+
+    main > section.expanded {
+        width: calc(90vw - 20px);
+        min-height: 60vh;
+        padding: 30px;
+        border-radius: 20px;
+    }
+}
+
+@media (max-height: 850px) and (orientation: landscape) {
+    .bento-grid {
+        gap: 25px;
+        padding: 40px;
+    }
+
+    main > section {
+        min-height: 200px;
+        border-radius: 20px;
     }
 }
